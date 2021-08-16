@@ -3,6 +3,6 @@ const router = express.Router();
 const uniqId = require(uniqId)
 
 router.get("/:stock", (req, res) => {
-    let ticker = req.params.id
-
+    let ticker = req.params.stock
+    axios.get()
 })
