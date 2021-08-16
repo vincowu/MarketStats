@@ -1,0 +1,28 @@
+@import "../../partials/main";
+
+.nav-bar{
+    background-color: $black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .logo{
+        flex-basis: 100%;
+        text-align: center;
+        &__image{
+            width: 10rem;
+            height: 4rem;
+        }
+    }
+    .tabs{
+        display: flex;
+        justify-content: center;
+        .tab-links{
+            text-decoration: none;
+            margin: 0 1.5rem;
+            &__pages{
+                color: $white;
+            }
+        }
+    }
+}
