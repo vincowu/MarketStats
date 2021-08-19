@@ -1,0 +1,34 @@
+@import "../../partials/main";
+
+.highlighted-stock{
+    margin: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    .keyInfo{
+        @include mobile-subheader
+    }
+    .keyInfo-Symbol{
+        margin-right: 1rem
+    }
+    .keyInfo-Name{
+        flex-basis: 80%;
+    }
+    .secondaryKeyInfo{
+        @include body-small;
+    }
+    .secondaryKeyInfo-Exchange{
+        margin-right: 1rem;
+    }
+    .stockInfo{
+        flex-basis: 50%;
+        &__title{
+            @include mobile-labels;
+        }
+        &__info{
+            @include body-small;
+        }
+    }
+    .stockInfoDescription{
+        flex-basis: 100%;
+    }
+}

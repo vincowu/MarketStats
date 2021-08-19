@@ -4,6 +4,11 @@
 @import "./variables";
 @import "./fonts";
 
-*{
-    font-family: 'Caslon Grad';
+.btn{
+    font-family: 'Inter Variable';
+    height: 2rem;
+    width: 2rem;
+    background-color: gray;
+    border: none;
+    border-radius: 0.25rem;
 }

@@ -1,7 +1,7 @@
 @import "../../partials/main";
 
 .nav-bar{
-    background-color: $black;
+    background-color: $grey;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -10,8 +10,8 @@
         flex-basis: 100%;
         text-align: center;
         &__image{
-            width: 10rem;
-            height: 4rem;
+            width: 13rem;
+            height: 5rem;
         }
     }
     .tabs{
@@ -20,8 +20,9 @@
         .tab-links{
             text-decoration: none;
             margin: 0 1.5rem;
+            @include mobile-labels;
             &__pages{
-                color: $white;
+                color: $black;
             }
         }
     }
