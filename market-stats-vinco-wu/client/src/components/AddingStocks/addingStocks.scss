@@ -1,0 +1,20 @@
+@import '../../partials/main';
+
+.adding-stocks{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 1rem 2rem;
+    &__input{
+        @include body-medium;
+        height: 2rem;
+        width: 10rem;
+        border: gray 0.1rem solid;
+        border-radius: 0.25rem;
+        margin-right: 1rem;
+    }
+    &__button{
+        background-color: $orange;
+        width: 8rem;
+    }
+}

@@ -1,0 +1,107 @@
+
+  @mixin mobile-subheader {
+    font-size: 20px;
+    line-height: 28px;
+    font-family: 'PlayFair Display';
+  }
+  
+  @mixin mobile-labels {
+    font-size: 13px;
+    line-height: 20px;
+    font-family: 'PlayFair Display';
+  }
+  
+  @mixin mobile-tableheader {
+    font-size: 11px;
+    line-height: 16px;
+    font-family: 'PlayFair Display';
+  }
+  
+  @mixin body-large {
+    font-size: 15px;
+    line-height: 26px;
+    font-family: 'Inter Variable';
+  }
+  
+  @mixin body-medium {
+    font-size: 13px;
+    line-height: 20px;
+    font-family: 'Inter Variable';
+  }
+  
+  @mixin body-small {
+    font-size: 11px;
+    line-height: 16px;
+    font-family: 'Inter Variable';
+  }
+  
+  //desktop & tablet
+  
+  @mixin desk-header {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  
+  @mixin desk-subheader {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  
+  @mixin desk-labels {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  
+  @mixin desk-tableheader {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  @mixin desk-bodylarge {
+    font-size: 16px;
+    line-height: 28px;
+  }
+  
+  @mixin desk-bodymedium {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  
+  @mixin desk-bodysmall {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  // btns
+  @mixin btn-link {
+    text-decoration: none;
+    width: 100%;
+  
+    @include tablet {
+      width: auto;
+    }
+    @include desktop {
+      width: auto;
+    }
+  }
+  
+  @mixin btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 20px;
+  }
+  
+  @mixin btn-text {
+    @include mobile-labels;
+    line-height: unset;
+    margin: 0;
+  
+    @include tablet {
+      @include desk-labels;
+    }
+    @include desktop {
+      @include desk-labels;
+    }
+  }
