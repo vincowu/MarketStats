@@ -23,7 +23,7 @@ router.post("/financials/:stock", async (req, res) => {
     let endDate = req.body.endDate;
     console.log(ticker)
     console.log()
-    return await axios.get(marketStack_API_URL + "eod" + `?access_key=${marketstack_key}` + `&symbols=${ticker}` + `&date_from=${startDate}` + `&date_from=${endDate}`)
+    return await axios.get(marketStack_API_URL + "eod" + `?access_key=${marketstack_key}` + `&symbols=${ticker}` + `&date_from=${startDate}` + `&date_to=${endDate}`)
         .then((response) => {
             res.send(response.data.data)
         })

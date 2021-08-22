@@ -8,16 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-function createData(stock, lasteod, percentageDay, percentageWeek) {
-    return { stock, lasteod, percentageDay, percentageWeek };
-}
-
-const rows = [
-    createData('AAPL', 155, 13.4, 17)
-]
+// {stock: "AAPL", lasteod: 155, percentageDay: 13.4, percentageWeek: 17}
+// const rows = [
+//     createData('AAPL', 155, 13.4, 17)
+// ]
 
 const Watchlist = (props) => {
-
     return (
         <TableContainer component={Paper}>
             <Table size="small" aria-label="a dense table">
@@ -30,21 +26,20 @@ const Watchlist = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.stock}>
+                    {props.watchlistInfo.map((row) => (
+                        <TableRow key={row.newlyadded}>
                             <TableCell component="th" scope="row">
-                                {row.stock}
+                                {row.newlyadded}
                             </TableCell>
-                            <TableCell align="right">{row.lasteod}</TableCell>
-                            <TableCell align="right">{row.percentageDay}</TableCell>
-                            <TableCell align="right">{row.percentageWeek}</TableCell>
+                            <TableCell align="right">{row.eod}</TableCell>
+                            <TableCell align="right">{row.newlyaddedDay}</TableCell>
+                            <TableCell align="right">{row.newlyaddedWeek}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }
-
 
 export default Watchlist

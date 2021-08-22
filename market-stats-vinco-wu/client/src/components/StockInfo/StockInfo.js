@@ -5,7 +5,6 @@ import './stockinfo.scss';
 const StockInfo = (props) => {
     const keyInfoKeys = ["Symbol", "Name", "Exchange", "Currency"]
     const infoKeys = ["Description", "Sector", "MarketCapitalization", "PERatio", "PEGRatio", "EPS", "RevenueTTM", "RevenuePerShareTTM", "GrossProfitTTM", "ProfitMargin", "TrailingPE", "ForwardPE", "52WeekHigh", "52WeekLow", "50DayMovingAverage", "SharesOutstanding", "ForwardAnnualDividendRate", "AnalystTargetPrice",]
-    console.log(props.stockInfo)
     return (
         <div className="highlighted-stock">
             {/* Displays general info: Company Name, Ticker Symbol, Exchange it trades on and Currency it uses */}
@@ -19,7 +18,7 @@ const StockInfo = (props) => {
                         </p>)
                 )
             })}
-            <StockInfoCharts />
+            <StockInfoCharts chartData={props.chartData} />
             {infoKeys.map((key) => {
                 return (
                     <div className={`stockInfo stockInfo${key}`}>

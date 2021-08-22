@@ -1,27 +1,30 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
-const mongoose = require('mongoose');
-const bearerToken = require('express-bearer-token');
-const oktaAuth = require('./middleware/auth');
-
+const user = require('./routes/user')
 require('dotenv').config();
+// Port 
 const { PORT } = process.env
+// Import MongoDB Initiation and Route to stockOfInterest
+const InitiateMongoServer = require('./db/config/db')
 const stockOfInterest = require('./routes/stockOfInterest')
 
 
+// Initiate MongoDb Server
+InitiateMongoServer();
+
+
+// middleware
 app.use(cors());
 app.use(express.json());
-// app.use(bearerToken())
-// app.use(oktaAuth)
+
+// Route to get highligthed stocks you search for
+app.use("/", stockOfInterest);
+// Route for User
+app.use("/user", user);
 
 
-app.use("/", stockOfInterest)
-
-// mongoose.connect(`mongodb://localhost:27017/user`)
-//     .then(() => {
-//         console.log('Connected to database');
+// Listening on Port 8080
 app.listen(PORT, () => {
     console.log(`Express server listening on port ${PORT}`);
 });
-    // });
