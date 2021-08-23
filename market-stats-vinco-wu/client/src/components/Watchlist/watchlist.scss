@@ -1,0 +1,36 @@
+@import "../../partials/main";
+
+.watchlist-box{
+    margin: 1rem 2rem;
+    .your-watchlist{
+        @include mobile-subheader;
+    }
+
+    .container{
+        overflow-x: scroll;
+        .table{
+            .table-header{
+                .table-header-row{
+                    &__cell{
+                        @include body-large;
+                        color: $black;
+                    }
+                }
+            }
+            .table-body{
+                .table-body-row{
+                    &__cell{
+                        @include body-medium;
+                        color: $black;
+                        &--green{
+                            color: $green;
+                        }
+                        &--red{
+                            color: $red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

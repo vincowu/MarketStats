@@ -4,7 +4,7 @@ import './home.scss';
 
 export class Home extends Component {
     state = {
-        ticker: ""
+        ticker: "",
     }
     onChange = (event) => {
         this.setState({

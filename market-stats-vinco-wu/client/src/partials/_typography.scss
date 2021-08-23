@@ -5,6 +5,12 @@
     font-family: 'PlayFair Display';
   }
   
+  @mixin mobile-percentage-header{
+    font-size: 17px;
+    line-height: 24px;
+    font-family: 'PlayFair Display';
+  }
+
   @mixin mobile-labels {
     font-size: 13px;
     line-height: 20px;
@@ -17,6 +23,12 @@
     font-family: 'PlayFair Display';
   }
   
+  @mixin body-percentage{
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'Inter Variable';
+  }
+
   @mixin body-large {
     font-size: 15px;
     line-height: 26px;

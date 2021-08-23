@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import StockInfo from '../../components/StockInfo/StockInfo'
 import { API_URL } from '../../util'
 import axios from 'axios';
+import StockInfo from '../../components/StockInfo/StockInfo';
+
 import HomeSearch from '../../components/HomeSearch/HomeSearch';
-import StockDNEModal from '../../components/StockDNEModal/StockDNEModal';
+
 import { Redirect } from 'react-router-dom';
 
 export class HighlightedStock extends Component {
     state = {
         stockInfo: null,
-        startDate: "",
-        endDate: ""
+        startDate: "2021-08-06",
+        endDate: "2021-08-19",
+        chartData: null,
     }
 
     componentDidMount() {
@@ -19,31 +21,38 @@ export class HighlightedStock extends Component {
                 this.setState({
                     stockInfo: res.data,
                 })
+                return ((axios.post(`${API_URL}/financials/${this.props.match.params.stock}`, {
+                    startDate: this.state.startDate,
+                    endDate: this.state.endDate
+                }
+                )))
+            })
+            .then((response) => {
+                this.setState({
+                    chartData: response.data
+                })
             })
             .catch(this.setState({
                 stockInfo: "DNE"
             }))
-        // .then(axios.get(`${API_URL}/financials/${this.props.match.params.stock}`, {
-        //     params: {
-        //         startDate: this.state.startDate,
-        //         endDate: this.state.endDate
-        //     }
-        // }))
-
     }
 
     render() {
         return (
             <>
-                {this.state.stockInfo && this.state.stockInfo !== "DNE" && (
-                    <div className="stock">
-                        <StockInfo stockInfo={this.state.stockInfo} />
-                    </div>)}
-                {this.state.stockInfo && this.state.stockInfo === "DNE" && (
-                    <>
-                        {/* <Redirect to="/" /> */}
-                    </>
-                )}
+                {
+                    this.state.stockInfo && this.state.stockInfo !== "DNE" && this.state.chartData && (
+                        <div className="stock">
+                            <StockInfo stockInfo={this.state.stockInfo} chartData={this.state.chartData} />
+                        </div>)
+                }
+                {
+                    this.state.stockInfo && this.state.stockInfo === "DNE" && (
+                        <>
+                            {/* <Redirect to="/" /> */}
+                        </>
+                    )
+                }
             </>
         )
     }

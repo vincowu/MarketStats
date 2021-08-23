@@ -8,43 +8,47 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-function createData(stock, lasteod, percentageDay, percentageWeek) {
-    return { stock, lasteod, percentageDay, percentageWeek };
-}
-
-const rows = [
-    createData('AAPL', 155, 13.4, 17)
-]
+// {stock: "AAPL", lasteod: 155, percentageDay: 13.4, percentageWeek: 17}
+// const rows = [
+//     createData('AAPL', 155, 13.4, 17)
+// ]
 
 const Watchlist = (props) => {
-
     return (
-        <TableContainer component={Paper}>
-            <Table size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Stock Name</TableCell>
-                        <TableCell align="right">EOD Price</TableCell>
-                        <TableCell align="right">1 Day %</TableCell>
-                        <TableCell align="right">1 Week %</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.stock}>
-                            <TableCell component="th" scope="row">
-                                {row.stock}
-                            </TableCell>
-                            <TableCell align="right">{row.lasteod}</TableCell>
-                            <TableCell align="right">{row.percentageDay}</TableCell>
-                            <TableCell align="right">{row.percentageWeek}</TableCell>
+        <div className="watchlist-box">
+            <h2 className="your-watchlist">Your Watchlist</h2>
+            <TableContainer component={Paper} className="container">
+                <Table size="small" aria-label="a dense table" className="table">
+                    <TableHead className="table-header">
+                        <TableRow className="table-header-row">
+                            <TableCell className="table-header-row__cell" >Stock Name</TableCell>
+                            <TableCell className="table-header-row__cell" align="right">EOD Price</TableCell>
+                            <TableCell className="table-header-row__cell" align="right">1 Day %</TableCell>
+                            <TableCell className="table-header-row__cell" align="right">1 Week %</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-}
+                    </TableHead>
+                    <TableBody className="table-body">
+                        {props.watchlistInfo.map((row) => (
+                            <TableRow key={row.newlyadded} className="table-body-row">
+                                <TableCell className="table-body-row__cell" component="th" scope="row">
+                                    {row.newlyadded.toUpperCase()}
+                                </TableCell>
 
+                                <TableCell className="table-body-row__cell" align="right">{row.eod}</TableCell>
+                                {row.newlyaddedDay >= 0 ?
+                                    (<TableCell className="table-body-row__cell table-body-row__cell--green" align="right">{row.newlyaddedDay}</TableCell>) :
+                                    (<TableCell className="table-body-row__cell table-body-row__cell--red" align="right">{row.newlyaddedDay}</TableCell>)}
+
+                                {row.newlyaddedWeek >= 0 ?
+                                    (<TableCell className="table-body-row__cell table-body-row__cell--green" align="right">{row.newlyaddedWeek}</TableCell>) :
+                                    (<TableCell className="table-body-row__cell table-body-row__cell--red" align="right">{row.newlyaddedWeek}</TableCell>)}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
+    )
+}
 
 export default Watchlist
