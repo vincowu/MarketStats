@@ -20,11 +20,22 @@ class Profile extends Component {
         },
         startDate: "",
         endDate: "",
+        watchlistReturns: {
+            day: 0,
+            week: 0,
+        }
     }
     correctedData = (data) => {
         return data.map((item) => ({
             close: item.close,
         }))
+    }
+    averageWatchlistReturns(listOfReturns, key) {
+        let returns = 0
+        for (let i = 0; i <= listOfReturns.length - 1; i++) {
+            returns = returns + (parseFloat(listOfReturns[i][key]))
+        }
+        return (returns / listOfReturns.length)
     }
     adding = (event) => {
         event.preventDefault()
@@ -34,7 +45,6 @@ class Profile extends Component {
             endDate: this.state.endDate
         })
             .then((response) => {
-                console.log(response)
                 this.setState({
                     newStock: {
                         stockEodData: this.correctedData(response.data),
@@ -43,12 +53,12 @@ class Profile extends Component {
                 })
             })
             .then((response) => {
-                console.log(this.state.newStock.stockEodData)
                 let lengthOfArray = this.state.newStock.stockEodData.length - 1;
                 let oneDayReturn = (((this.state.newStock.stockEodData[0]["close"] / this.state.newStock.stockEodData[1]["close"]) - 1) * 100).toFixed(2);
                 let oneWeekReturn = (((this.state.newStock.stockEodData[0]["close"] / this.state.newStock.stockEodData[lengthOfArray]["close"]) - 1) * 100).toFixed(2);
                 this.setState({
                     newStock: {
+                        stockEodData: this.state.newStock.stockEodData,
                         newlyadded: this.state.newStock.newlyadded,
                         newlyaddedDay: oneDayReturn,
                         newlyaddedWeek: oneWeekReturn,
@@ -68,6 +78,16 @@ class Profile extends Component {
                     }
                 })
             })
+            .then(() => {
+                let daily = (this.averageWatchlistReturns(this.state.watchlistStocks, "newlyaddedDay")).toFixed(2)
+                let weekly = (this.averageWatchlistReturns(this.state.watchlistStocks, "newlyaddedWeek")).toFixed(2)
+                this.setState({
+                    watchlistReturns: {
+                        day: daily,
+                        week: weekly,
+                    }
+                })
+            })
     }
 
     componentDidMount() {
@@ -80,12 +100,13 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.state.watchlistStocks)
         console.log(this.state)
         return (
             <>
+                <Performance returnInfo={this.state.watchlistReturns} />
                 <Watchlist watchlistInfo={this.state.watchlistStocks} />
                 <AddingStocks add={this.adding} />
+                <Historical />
             </>
         )
     }

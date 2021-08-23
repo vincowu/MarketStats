@@ -4,7 +4,7 @@ import axios from 'axios';
 import StockInfo from '../../components/StockInfo/StockInfo';
 
 import HomeSearch from '../../components/HomeSearch/HomeSearch';
-import StockDNEModal from '../../components/StockDNEModal/StockDNEModal';
+
 import { Redirect } from 'react-router-dom';
 
 export class HighlightedStock extends Component {

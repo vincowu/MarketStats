@@ -49,6 +49,10 @@
             border: none;
             @include body-medium;
         }
+        .error-login{
+            color: $red;
+            @include body-small;
+        }
         .buttons-container{
             display: flex;
             flex-direction: column;

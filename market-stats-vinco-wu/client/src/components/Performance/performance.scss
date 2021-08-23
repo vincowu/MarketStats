@@ -1,0 +1,25 @@
+@import "../../partials/main";
+
+.performance{
+    margin: 1rem 2rem;
+    .performance-header{
+        @include mobile-subheader;
+    }
+    .performance-times{
+        width: 100%;
+        &__title{
+            color: $orange;
+            @include body-large;
+        }
+        &__percentages{
+            &--green{
+                @include body-percentage;
+                color: $green;
+            }
+            &--red{
+                @include body-percentage;
+                color: $red;
+            }
+        }
+    }
+}

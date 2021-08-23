@@ -1,23 +1,51 @@
 import axios from 'axios'
 import './loginModal.scss';
 import React, { Component } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
 import logo from '../../assets/logo/Market-Stats-logo.png';
 import close from '../../assets/icons/close_black_24dp.svg'
 import { Modal } from '@material-ui/core';
+import { API_URL } from '../../util';
 
 export class LoginModal extends Component {
     state = {
         formInfo: null,
+        incorrect: false,
+        token: null,
     }
     formChange = (event) => {
         this.setState({
             formInfo: { ...this.state.formInfo, [event.target.name]: event.target.value }
         })
-        console.log(this.state.formInfo)
     }
     formSubmit = (event) => {
         event.preventDefault();
-        console.log(event)
+        console.log(API_URL + "/user/login")
+        console.log(this.state.formInfo.email)
+        console.log(this.state.formInfo.password)
+        axios.post(API_URL + "/user/login", {
+            email: this.state.formInfo.email,
+            password: this.state.formInfo.password
+        })
+            .then((req) => {
+                if (Object.values(req.data)[0] === "User Does Not Exist" || Object.values(req.data)[0] === "Incorrect Password!") {
+                    this.setState({
+                        incorrect: true
+                    })
+                    return
+                }
+                else if (req.data.token) {
+                    this.setState({
+                        token: req.data.token
+                    })
+                    axios.get("user/me", {
+                        headers: {
+                            token: this.state.token
+                        }
+                    })
+                }
+            })
+
     }
 
     render() {
@@ -31,11 +59,15 @@ export class LoginModal extends Component {
                         <img className="close" src={close} onClick={this.props.closing} />
                     </div>
                     <h2 className="welcome-message">Welcome!</h2>
-                    <form onSubmit={this.handleSubmit} className="login-form">
+                    <form onSubmit={this.formSubmit} className="login-form">
                         {/* Email */}
-                        <input type="email" name="email" onChange={this.handleChange} placeholder="Your Email" className="login-form__text-box" />
+                        <input type="email" name="email" onChange={this.formChange} placeholder="Your Email" className="login-form__text-box" />
+                        {/* Incorrect Email or Password */}
+                        {this.state.incorrect && (
+                            <p className="error-login">Invalid Email or password</p>
+                        )}
                         {/* Password */}
-                        <input type="password" name="password" onChange={this.handleChange} placeholder="Your Password" className="login-form__text-box" />
+                        <input type="password" name="password" onChange={this.formChange} placeholder="Your Password" className="login-form__text-box" />
                         {/* Button Container */}
                         <div className="buttons-container">
                             <button className="form-buttons" type="submit">Log in</button>

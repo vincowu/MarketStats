@@ -39,7 +39,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact>
             <Home />
-            {this.state.loginModal && (<LoginModal open={this.state.loginModal} closing={this.closeModals} signup={this.clickSignup} />)};
+            {this.state.loginModal && (<LoginModal open={this.state.loginModal} closing={this.closeModals} signup={this.clickSignup} />)}
             {this.state.signupModal && (<SignUpModal open={this.state.signupModal}
               closing={this.closeModals} />)}
           </Route>

@@ -103,12 +103,12 @@ router.post("/login", [
                 email
             });
             if (!user)
-                return res.status(400).json({
+                return res.status(200).json({
                     message: "User Does Not Exist"
                 });
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return res.status(400).json({
+                return res.status(200).json({
                     message: "Incorrect Password!"
                 })
             };
