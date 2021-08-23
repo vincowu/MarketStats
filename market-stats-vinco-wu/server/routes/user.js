@@ -6,14 +6,12 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 
 const User = require("../db/models/user");
+const Stock = require("../db/models/stock");
 
 router.post("/signup",
     [
         // check ([field,message]) will validate to see if they match the logic and if not it will return the message. Returns validation chain.
         // https://express-validator.github.io/docs/validation-chain-api.html
-        check("username", "Please Enter a Valid Username")
-            .not()
-            .isEmpty(),
         check("email", "Please enter a valid email").isEmail(),
         check("password", "Please enter a valid password").isLength({
             min: 6
@@ -29,7 +27,6 @@ router.post("/signup",
             });
         }
         const {
-            username,
             email,
             password
         } = req.body;
@@ -46,7 +43,6 @@ router.post("/signup",
             }
             // otherwise it will create a new User
             user = new User({
-                username,
                 email,
                 password
             });
@@ -142,6 +138,35 @@ router.get("/me", auth, async (req, res) => {
         res.send({ message: "Error in Fetching user" });
     }
 });
+
+router.get("/stock", auth, async (req, res) => {
+    try {
+        const stock = await Stock.find({ userId: req.body.id });
+        if (!stock) {
+            res.send("User was not found")
+        }
+        else {
+            res.send(stock)
+        }
+    }
+    catch (e) {
+        res.send({ message: "Error in Fetching user" })
+    }
+})
+
+router.post("/stock", auth, async (req, res) => {
+    const stock = new Stock({
+        watchlistStocks: req.body.stocks,
+        userId: req.body.userId
+    })
+    try {
+        const stockValue = await stock.save()
+        res.send(stockValue)
+    }
+    catch (e) {
+
+    }
+})
 
 module.exports = router;
 

@@ -4,12 +4,30 @@
     color: $black;
     width: 80%;
     margin: 1rem 2rem;
+    @include tablet{
+        margin: 2rem 4rem
+    }
+    @include desktop{
+
+    }
     &__header{
         @include mobile-subheader;
+        @include tablet{
+            @include desk-subheader;
+        }
+        @include desktop{
+            @include desk-subheader;
+        }
     }
     &__description{
         color: $orange;
         @include mobile-labels;
+        @include tablet{
+            @include desk-labels
+        }
+        @include desktop{
+            @include desk-labels
+        }
     }
 }
 .search-bar{
@@ -17,21 +35,40 @@
     display: flex;
     margin: 1rem 2rem;
     align-items: center;
+    @include tablet{
+        margin: 1rem 4rem;
+    }
+    @include desktop{
+
+    }
     .search-box{
         height: 2rem;
         width: 10rem;
         border: gray 0.1rem solid;
         border-radius: 0.25rem;
         margin-right: 1rem;
-
+        @include tablet{
+            height: 3rem;
+            width: 20rem;
+        }
+        @include desktop{
+    
+        }
     }
     .search-link{
         &__button{
             height: 2rem;
             width: 2rem;
-            background-color: gray;
+            background-color: $orange;
             border: none;
             border-radius: 0.25rem;
+            @include tablet{
+                width: 3rem;
+                height: 3rem;
+            }
+            @include desktop{
+        
+            }
         }
     }
 }

@@ -52,36 +52,55 @@
   @mixin desk-header {
     font-size: 32px;
     line-height: 40px;
+    font-family: 'PlayFair Display';
   }
   
   @mixin desk-subheader {
     font-size: 24px;
     line-height: 32px;
+    font-family: 'PlayFair Display';
   }
   
   @mixin desk-labels {
-    font-size: 14px;
+    font-size: 20px;
     line-height: 22px;
+    font-family: 'PlayFair Display';
   }
   
   @mixin desk-tableheader {
     font-size: 12px;
     line-height: 18px;
+    font-family: 'PlayFair Display';
+  }
+
+  @mixin desk-percentage-header{
+    font-size: 28px;
+    line-height: 28px;
+    font-family: 'Inter Variable';
+  }
+
+  @mixin desk-bodyXlarge{
+    font-size: 20px;
+    line-height: 28px;
+    font-family: 'Inter Variable';
   }
   
   @mixin desk-bodylarge {
     font-size: 16px;
     line-height: 28px;
+    font-family: 'Inter Variable';
   }
   
   @mixin desk-bodymedium {
     font-size: 14px;
     line-height: 22px;
+    font-family: 'Inter Variable';
   }
   
   @mixin desk-bodysmall {
     font-size: 12px;
     line-height: 18px;
+    font-family: 'Inter Variable';
   }
   
   // btns

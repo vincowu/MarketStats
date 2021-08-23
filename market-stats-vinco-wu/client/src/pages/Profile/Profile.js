@@ -6,6 +6,7 @@ import AddingStocks from '../../components/AddingStocks/AddingStocks';
 import axios from 'axios';
 import { API_URL } from '../../util';
 import { formatTime, subtractWeek } from '../../helpers/time';
+import { withRouter } from 'react-router-dom';
 import { MenuList } from '@material-ui/core';
 
 class Profile extends Component {
@@ -93,10 +94,19 @@ class Profile extends Component {
     componentDidMount() {
         let today = formatTime(new Date())
         let weekAgo = formatTime(subtractWeek(new Date()))
+        let token = sessionStorage.getItem("token")
         this.setState({
             startDate: weekAgo,
             endDate: today
         })
+        axios.get(API_URL + "/user/me", {
+            headers: {
+                token: token
+            }
+        })
+            .then((res) => {
+                console.log(res)
+            })
     }
 
     render() {
@@ -112,4 +122,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default withRouter(Profile)

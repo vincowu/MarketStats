@@ -2,23 +2,64 @@
 
 .performance{
     margin: 1rem 2rem;
+    @include tablet{
+        margin: 2rem 4rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @include desktop{
+        display: flex;
+    }
     .performance-header{
         @include mobile-subheader;
+        @include tablet{
+            flex-basis: 100%;
+            width: 100%;
+            margin-bottom: 1rem;
+            @include desk-subheader;
+        }
+        @include desktop{
+            @include desk-subheader;
+        }
     }
     .performance-times{
         width: 100%;
+        @include tablet{
+            width: 50%;
+        }
+        @include desktop{
+            width: 50%;
+        }
         &__title{
             color: $orange;
             @include body-large;
+            @include tablet{
+                @include desk-bodyXlarge;
+            }
+            @include desktop{
+                @include desk-bodyXlarge;
+            }
         }
         &__percentages{
             &--green{
                 @include body-percentage;
                 color: $green;
+                @include tablet{
+                    @include desk-percentage-header;
+                }
+                @include desktop{
+                    @include desk-percentage-header;
+                }
             }
             &--red{
                 @include body-percentage;
                 color: $red;
+                @include tablet{
+                    @include desk-percentage-header;
+                }
+                @include desktop{
+                    @include desk-percentage-header;
+                }
             }
         }
     }

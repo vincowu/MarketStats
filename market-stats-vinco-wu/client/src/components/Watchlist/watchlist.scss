@@ -2,8 +2,20 @@
 
 .watchlist-box{
     margin: 1rem 2rem;
+    @include tablet{
+        margin: 2rem 4rem;
+    }
+    @include desktop{
+        
+    }
     .your-watchlist{
         @include mobile-subheader;
+        @include tablet{
+            @include desk-subheader;
+        }
+        @include desktop{
+            @include desk-subheader;
+        }
     }
 
     .container{
@@ -14,6 +26,12 @@
                     &__cell{
                         @include body-large;
                         color: $black;
+                        @include tablet{
+                            @include desk-bodyXlarge;
+                        }
+                        @include desktop{
+                            @include desk-bodyXlarge;
+                        }
                     }
                 }
             }
@@ -22,6 +40,12 @@
                     &__cell{
                         @include body-medium;
                         color: $black;
+                        @include tablet{
+                            @include desk-bodylarge;
+                        }
+                        @include desktop{
+                            @include desk-bodylarge;
+                        }
                         &--green{
                             color: $green;
                         }
