@@ -7,7 +7,7 @@ const HomeSearch = (props) => {
     return (
         <>
             <div className="home-message">
-                <h1 className="home-message__header">Market analysis tool for the average investor</h1>
+                <h1 className="home-message__header">A market analysis tool for the average investor</h1>
                 <h2 className="home-message__description">Search your favorite companies by stock tickers and see how they're doing as a business!</h2>
             </div>
             <form className="search-bar" >

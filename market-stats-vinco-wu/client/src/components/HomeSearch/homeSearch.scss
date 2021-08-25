@@ -2,36 +2,91 @@
 
 .home-message{
     color: $black;
-    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin: 1rem 2rem;
+    border-bottom: 1px black solid;
+    @include tablet{
+        margin: 2rem 4rem
+    }
+    @include desktop{
+        margin: 2rem 4rem
+    }
     &__header{
+        width: 75%;
+        text-align: center;
+        margin-bottom: 0.5rem;
         @include mobile-subheader;
+        @include tablet{
+            @include desk-subheader;
+            margin-bottom: 1rem;
+        }
+        @include desktop{
+            @include desk-subheader;
+            margin-bottom: 1rem;
+        }
     }
     &__description{
+        width: 75%;
         color: $orange;
+        text-align: center;
+        padding-bottom: 1rem;
         @include mobile-labels;
+        @include tablet{
+            @include desk-labels;
+            padding-bottom: 1.5rem;
+        }
+        @include desktop{
+            @include desk-labels;
+            padding-bottom: 1.5rem;
+        }
     }
 }
 .search-bar{
     width: 80%;
     display: flex;
-    margin: 1rem 2rem;
+    justify-content: center;
+    margin: auto;
     align-items: center;
+    @include tablet{
+        width: 90%;
+        margin: 1rem 4rem;
+    }
+    @include desktop{
+        width: 90%;
+        margin: 1rem 4rem;
+    }
     .search-box{
         height: 2rem;
         width: 10rem;
         border: gray 0.1rem solid;
         border-radius: 0.25rem;
         margin-right: 1rem;
-
+        @include tablet{
+            height: 3rem;
+            width: 20rem;
+        }
+        @include desktop{
+            height: 3rem;
+            width: 20rem;
+        }
     }
     .search-link{
         &__button{
             height: 2rem;
             width: 2rem;
-            background-color: gray;
+            background-color: $orange;
             border: none;
             border-radius: 0.25rem;
+            @include tablet{
+                width: 3rem;
+                height: 3rem;
+            }
+            @include desktop{
+                width: 3rem;
+                height: 3rem;
+            }
         }
     }
 }

@@ -4,31 +4,89 @@
     margin: 1rem 2rem;
     display: flex;
     flex-wrap: wrap;
+    @include tablet{
+        margin: 2rem 4rem;
+    }
+    @include desktop{
+
+    }
     .keyInfo{
-        @include mobile-subheader
+        @include mobile-subheader;
+        @include tablet{
+            @include desk-subheader;
+        }
+        @include desktop{
+            @include desk-subheader;
+        }
     }
     .keyInfo-Symbol{
-        margin-right: 1rem
+        margin-right: 1rem;
+        @include tablet{
+            // flex-basis: 80%;
+        }
     }
     .keyInfo-Name{
         flex-basis: 80%;
+        @include tablet{
+        }
+        @include desktop{
+            
+        }
     }
     .secondaryKeyInfo{
         @include body-small;
+        @include tablet{
+            @include desk-bodymedium;
+        }
+        @include desktop{
+            @include desk-bodymedium;
+        }
     }
     .secondaryKeyInfo-Exchange{
         margin-right: 1rem;
+        @include tablet{
+
+        }
+        @include desktop{
+            
+        }
     }
     .stockInfo{
         flex-basis: 50%;
+        @include tablet{
+
+        }
+        @include desktop{
+            
+        }
         &__title{
             @include mobile-labels;
+            @include tablet{
+                @include desk-labels;
+            }
+            @include desktop{
+                @include desk-labels;
+            }
         }
         &__info{
             @include body-small;
+            @include tablet{
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+                @include desk-bodylarge;
+            }
+            @include desktop{
+                @include desk-bodylarge; 
+            }
         }
     }
     .stockInfoDescription{
         flex-basis: 100%;
+        @include tablet{
+            margin-top: 1rem;
+        }
+        @include desktop{
+            margin-top: 1rem;
+        }
     }
 }

@@ -1,27 +1,22 @@
-// const OktaJwtVerifier = require('@okta/jwt-verifier');
 
-// const oktaJwtVerifier = new OktaJwtVerifier({
-//     clientId: '{yourClientId}',
-//     issuer: 'https://dev-43058023.okta.com/oauth2/default'
-// });
+const { ResultWithContext } = require("express-validator/src/chain");
+const jwt = require("jsonwebtoken");
 
-// async function oktaAuth(req, res, next) {
-//     try {
-//         const token = req.token;
-//         if (!token) {
-//             return res.status(401).send('Not Authorized');
-//         }
-//         const jwt = await oktaJwtVerifier.verifyAccessToken(token, ['api://default']);
-//         req.user = {
-//             uid: jwt.claims.uid,
-//             email: jwt.claims.sub
-//         };
-//         next();
-//     }
-//     catch (err) {
-//         console.log('AUTH ERROR: ', err);
-//         return res.status(401).send(err.message);
-//     }
-// }
-
-// module.exports = oktaAuth;
+module.exports = function (req, res, next) {
+    // const token = req.headers.authorization("token");
+    if (!req.headers.authorization) return res.status(401).json({ message: "Auth Error" });
+    const authToken = req.headers.authorization.split(" ")[1]
+    try {
+        jwt.verify(authToken, "randomString", (err, decoded) => {
+            if (err) {
+                res.json(err.message)
+                // return res.status(401).send(err.message)
+            }
+            req.decoded = decoded;
+            next();
+        });
+    } catch (e) {
+        console.error(e);
+        res.status(500).send({ message: "Invalid Token" });
+    }
+};

@@ -1,0 +1,70 @@
+@import "../../partials/main";
+
+.watchlist-box{
+    margin: 1rem 2rem;
+    @include tablet{
+        margin: 2rem 4rem;
+    }
+    @include desktop{
+        
+    }
+    .watchlist-title{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        .your-watchlist{
+            @include mobile-subheader;
+            @include tablet{
+                @include desk-subheader;
+            }
+            @include desktop{
+                @include desk-subheader;
+            }
+        }
+        .edit-icon{
+            margin-right: 1rem;
+        }
+    }
+    .container{
+        overflow-x: scroll;
+        .table{
+            .table-header{
+                .table-header-row{
+                    &__cell{
+                        @include body-large;
+                        color: $black;
+                        @include tablet{
+                            @include desk-bodyXlarge;
+                        }
+                        @include desktop{
+                            @include desk-bodyXlarge;
+                        }
+                    }
+                }
+            }
+            .table-body{
+                .table-body-row{
+                    &__cell{
+                        @include body-medium;
+                        color: $black;
+                        @include tablet{
+                            @include desk-bodylarge;
+                        }
+                        @include desktop{
+                            @include desk-bodylarge; 
+                        }
+                        .delete-icon{
+                            padding-top: 9px;
+                        }
+                        &--green{
+                            color: $green;
+                        }
+                        &--red{
+                            color: $red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

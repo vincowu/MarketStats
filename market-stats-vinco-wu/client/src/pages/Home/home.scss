@@ -4,3 +4,57 @@
     background-color: $white;
     width: 100%;
 }
+
+.image-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 2rem;
+    .main-image{
+        width: 70%;
+        margin-right: 2rem;
+        @include tablet{
+            max-width: 600px;
+        }
+        @include desktop{
+
+        }
+    }
+}
+
+.main-message{
+    margin: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    @include tablet{
+        margin: 2rem 4rem;
+    }
+    @include desktop{
+        margin: 2rem 4rem;
+    }
+    &__header{
+        @include mobile-subheader;
+        text-align: center;
+        width: 75%;
+        margin-bottom: 0.5rem;
+        @include tablet{
+            @include desk-subheader;
+        }
+        @include desktop{
+            @include desk-subheader;
+        }
+    }
+    &__description{
+        color: $orange;
+        text-align: center;
+        width: 75%;
+        @include mobile-labels;
+        @include tablet{
+            @include desk-labels;
+        }
+        @include desktop{
+            @include desk-labels;
+        }
+    }
+}
