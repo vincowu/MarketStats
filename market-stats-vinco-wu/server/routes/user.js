@@ -7,6 +7,7 @@ const auth = require('../middleware/auth')
 
 const User = require("../db/models/user");
 const Stock = require("../db/models/stock");
+const user = require("../db/models/user");
 
 router.post("/signup",
     [
@@ -130,9 +131,10 @@ router.post("/login", [
 
 
 router.get("/me", auth, async (req, res) => {
+    console.log(req.decoded)
     try {
         // request.user is getting fetched from Middleware after token authentication
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.decoded.user.id);
         res.json(user);
     } catch (e) {
         res.send({ message: "Error in Fetching user" });
@@ -141,9 +143,10 @@ router.get("/me", auth, async (req, res) => {
 
 router.get("/stock", auth, async (req, res) => {
     try {
-        const stock = await Stock.find({ userId: req.body.id });
+        const userId = await User.findById(req.decoded.user.id1);
+        const stock = await Stock.find({ userId });
         if (!stock) {
-            res.send("User was not found")
+            res.send("No stocks found.")
         }
         else {
             res.send(stock)
@@ -155,9 +158,10 @@ router.get("/stock", auth, async (req, res) => {
 })
 
 router.post("/stock", auth, async (req, res) => {
+    res.send(req.body)
     const stock = new Stock({
-        watchlistStocks: req.body.stocks,
-        userId: req.body.userId
+        watchlistStocks: req.body.watchlistStocks,
+        userId: req.decoded.user.id
     })
     try {
         const stockValue = await stock.save()

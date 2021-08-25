@@ -8,16 +8,23 @@
     @include desktop{
         
     }
-    .your-watchlist{
-        @include mobile-subheader;
-        @include tablet{
-            @include desk-subheader;
+    .watchlist-title{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        .your-watchlist{
+            @include mobile-subheader;
+            @include tablet{
+                @include desk-subheader;
+            }
+            @include desktop{
+                @include desk-subheader;
+            }
         }
-        @include desktop{
-            @include desk-subheader;
+        .edit-icon{
+            margin-right: 1rem;
         }
     }
-
     .container{
         overflow-x: scroll;
         .table{
@@ -44,7 +51,10 @@
                             @include desk-bodylarge;
                         }
                         @include desktop{
-                            @include desk-bodylarge;
+                            @include desk-bodylarge; 
+                        }
+                        .delete-icon{
+                            padding-top: 9px;
                         }
                         &--green{
                             color: $green;

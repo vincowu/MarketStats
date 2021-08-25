@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Watchlist from '../../components/Watchlist/Watchlist';
 import Performance from '../../components/Performance/Performance';
-import Historical from '../../components/Historical/Historical';
 import AddingStocks from '../../components/AddingStocks/AddingStocks';
 import axios from 'axios';
 import { API_URL } from '../../util';
 import { formatTime, subtractWeek } from '../../helpers/time';
 import { withRouter } from 'react-router-dom';
 import { MenuList } from '@material-ui/core';
+import deleteIcon from '../../assets/icons/remove_circle_black_24dp.svg';
 
 class Profile extends Component {
     state = {
@@ -24,7 +24,8 @@ class Profile extends Component {
         watchlistReturns: {
             day: 0,
             week: 0,
-        }
+        },
+        deleteShow: false
     }
     correctedData = (data) => {
         return data.map((item) => ({
@@ -63,7 +64,8 @@ class Profile extends Component {
                         newlyadded: this.state.newStock.newlyadded,
                         newlyaddedDay: oneDayReturn,
                         newlyaddedWeek: oneWeekReturn,
-                        eod: this.state.newStock.stockEodData[0]["close"]
+                        eod: this.state.newStock.stockEodData[0]["close"],
+                        delete: deleteIcon,
                     }
                 })
             })
@@ -91,6 +93,31 @@ class Profile extends Component {
             })
     }
 
+    editWatchlist = (event) => {
+        this.setState({
+            deleteShow: (!this.state.deleteShow)
+        })
+        console.log(this.state.deleteShow)
+    }
+
+    deleting = (event) => {
+        let stockTicker = event.target.id;
+        let deleted = this.state.watchlistStocks.map((stock) => {
+            return stock.newlyadded != stockTicker
+        })
+        let oldWatchlist = this.state.watchlistStocks
+        let newWatchlist = []
+        for (let i = 0; i < deleted.length; i++) {
+            if (deleted[i]) {
+                newWatchlist.push(oldWatchlist[i])
+            }
+        }
+        this.setState({
+            watchlistStocks: newWatchlist
+        })
+
+    }
+
     componentDidMount() {
         let today = formatTime(new Date())
         let weekAgo = formatTime(subtractWeek(new Date()))
@@ -114,9 +141,8 @@ class Profile extends Component {
         return (
             <>
                 <Performance returnInfo={this.state.watchlistReturns} />
-                <Watchlist watchlistInfo={this.state.watchlistStocks} />
+                <Watchlist watchlistInfo={this.state.watchlistStocks} deleteState={this.state.deleteShow} editPopUp={this.editWatchlist} delete={this.deleting} />
                 <AddingStocks add={this.adding} />
-                <Historical />
             </>
         )
     }
