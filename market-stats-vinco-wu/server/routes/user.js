@@ -7,7 +7,6 @@ const auth = require('../middleware/auth')
 
 const User = require("../db/models/user");
 const Stock = require("../db/models/stock");
-const user = require("../db/models/user");
 
 router.post("/signup",
     [
@@ -159,13 +158,27 @@ router.get("/stock", auth, async (req, res) => {
 
 router.post("/stock", auth, async (req, res) => {
     res.send(req.body)
-    const stock = new Stock({
-        watchlistStocks: req.body.watchlistStocks,
-        userId: req.decoded.user.id
-    })
     try {
-        const stockValue = await stock.save()
-        res.send(stockValue)
+        const userId = await User.findById(req.decoded.user.id1);
+        const stock = await Stock.find({ userId });
+        console.log(stock)
+        if (!!stock) {
+            const newWatchlist = new Stock({
+                watchlistStocks: [],
+                userId: req.decoded.user.id
+            })
+            await newWatchlist.save()
+        }
+        else {
+            Stock.findOneAndUpdate({ userId }, { $push: { watchlistStocks: req.body.stockAdd } },
+                function (error) {
+                    if (error) {
+                        console.log("error");
+                    } else {
+                        console.log('sent');
+                    }
+                })
+        }
     }
     catch (e) {
 

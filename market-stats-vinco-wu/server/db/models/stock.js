@@ -2,14 +2,16 @@ const mongoose = require("mongoose");
 
 const StockSchema = mongoose.Schema(
     {
-        watchlistStocks: [
-            {
-                newlyAddedDay: String
-            }
-        ],
+        watchlistStocks: {
+            type: Array
+        },
+        stockAdd: {
+            type: String
+        },
         userId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: true
         }
     });
 

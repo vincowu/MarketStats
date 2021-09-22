@@ -41,6 +41,9 @@
         .close{
             float: right
         }
+        .close:hover{
+            cursor: pointer;
+        }
     }
     .welcome-message{
         @include mobile-labels;

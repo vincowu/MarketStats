@@ -10,51 +10,70 @@
     display: flex;
     justify-content: center;
     margin-right: 2rem;
+    background-color: rgb(242,242,242);
     .main-image{
-        width: 70%;
-        margin-right: 2rem;
+        width: 100%;
         @include tablet{
-            max-width: 600px;
+            max-width: 100%;
         }
         @include desktop{
-
+            max-width: 800px;
         }
     }
 }
 
 .main-message{
-    margin: 1rem 2rem;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    @include tablet{
-        margin: 2rem 4rem;
-    }
+    justify-content: center;
     @include desktop{
-        margin: 2rem 4rem;
+        justify-content: flex-start;
     }
-    &__header{
-        @include mobile-subheader;
-        text-align: center;
-        width: 75%;
-        margin-bottom: 0.5rem;
+    .main-message-text{
+        margin: 1rem 2rem;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
         @include tablet{
-            @include desk-subheader;
+            margin: 2rem 4rem;
         }
         @include desktop{
-            @include desk-subheader;
+            margin: 2rem 4rem;
+            height: 70px;
+        }
+        &__header{
+            @include mobile-subheader;
+            text-align: left;
+            width: 75%;
+            margin-bottom: 1rem;
+            @include tablet{
+                @include desk-subheader;
+            }
+            @include desktop{
+                @include desk-subheader;
+                height: 32px;
+            }
+        }
+        &__description{
+            color: $orange;
+            text-align: left;
+            width: 75%;
+            @include mobile-labels;
+            @include tablet{
+                @include desk-labels;
+            }
+            @include desktop{
+                @include desk-labels;
+                height: 22px;
+            }
         }
     }
-    &__description{
-        color: $orange;
-        text-align: center;
-        width: 75%;
-        @include mobile-labels;
-        @include tablet{
-            @include desk-labels;
-        }
+    .main-message-image{
+        max-width: 80%;
+        margin-bottom: 3rem;
         @include desktop{
-            @include desk-labels;
+            margin-left: auto;
+            margin-right: 10rem;
         }
     }
 }
