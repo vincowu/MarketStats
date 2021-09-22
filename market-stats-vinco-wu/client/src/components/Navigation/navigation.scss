@@ -2,7 +2,7 @@
 
 
 .nav-bar{
-    background-color: $grey;
+    background-color: $orange;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -39,6 +39,9 @@
             }
             &__pages{
                 color: $black;
+            }
+            &__pages:hover{
+                cursor: pointer;
             }
         }
     }
