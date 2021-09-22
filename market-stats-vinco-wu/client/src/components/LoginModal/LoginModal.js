@@ -34,19 +34,22 @@ export class LoginModal extends Component {
                     })
                     return
                 }
-                else if (req.data.token) {
+                else {
                     this.setState({
                         token: req.data.token
                     })
-                    axios.get("user/me", {
-                        headers: {
-                            token: this.state.token
-                        }
-                    })
+                    console.log('addedToken')
                 }
             })
-
+            .then(() => {
+                if (!!this.state.token) {
+                    sessionStorage.setItem("token", this.state.token)
+                    this.props.history.push("profile")
+                    console.log("yo")
+                }
+            })
     }
+
 
     render() {
         return (
@@ -82,4 +85,4 @@ export class LoginModal extends Component {
     }
 }
 
-export default LoginModal
+export default withRouter(LoginModal)

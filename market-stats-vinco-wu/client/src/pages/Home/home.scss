@@ -4,3 +4,76 @@
     background-color: $white;
     width: 100%;
 }
+
+.image-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 2rem;
+    background-color: rgb(242,242,242);
+    .main-image{
+        width: 100%;
+        @include tablet{
+            max-width: 100%;
+        }
+        @include desktop{
+            max-width: 800px;
+        }
+    }
+}
+
+.main-message{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    @include desktop{
+        justify-content: flex-start;
+    }
+    .main-message-text{
+        margin: 1rem 2rem;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        @include tablet{
+            margin: 2rem 4rem;
+        }
+        @include desktop{
+            margin: 2rem 4rem;
+            height: 70px;
+        }
+        &__header{
+            @include mobile-subheader;
+            text-align: left;
+            width: 75%;
+            margin-bottom: 1rem;
+            @include tablet{
+                @include desk-subheader;
+            }
+            @include desktop{
+                @include desk-subheader;
+                height: 32px;
+            }
+        }
+        &__description{
+            color: $orange;
+            text-align: left;
+            width: 75%;
+            @include mobile-labels;
+            @include tablet{
+                @include desk-labels;
+            }
+            @include desktop{
+                @include desk-labels;
+                height: 22px;
+            }
+        }
+    }
+    .main-message-image{
+        max-width: 80%;
+        margin-bottom: 3rem;
+        @include desktop{
+            margin-left: auto;
+            margin-right: 10rem;
+        }
+    }
+}

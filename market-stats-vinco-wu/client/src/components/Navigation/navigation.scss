@@ -2,17 +2,26 @@
 
 
 .nav-bar{
-    background-color: $grey;
+    background-color: $orange;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-bottom: 2rem;
     .logo{
         flex-basis: 100%;
         text-align: center;
         &__image{
             width: 13rem;
             height: 5rem;
+            @include tablet{
+                width: 20rem;
+                height: 8rem;
+            }
+            @include desktop{
+                width: 20rem;
+                height: 8rem;
+            }
         }
     }
     .tabs{
@@ -22,8 +31,17 @@
             text-decoration: none;
             margin: 0 1.5rem;
             @include mobile-labels;
+            @include tablet{
+                @include desk-labels
+            }
+            @include desktop{
+                @include desk-labels
+            }
             &__pages{
                 color: $black;
+            }
+            &__pages:hover{
+                cursor: pointer;
             }
         }
     }

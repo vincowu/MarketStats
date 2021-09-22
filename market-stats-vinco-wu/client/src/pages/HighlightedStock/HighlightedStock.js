@@ -10,8 +10,8 @@ import { Redirect } from 'react-router-dom';
 export class HighlightedStock extends Component {
     state = {
         stockInfo: null,
-        startDate: "2021-08-06",
-        endDate: "2021-08-19",
+        startDate: "2021-08-18",
+        endDate: "2021-09-01",
         chartData: null,
     }
 

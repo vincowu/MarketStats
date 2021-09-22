@@ -6,14 +6,12 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 
 const User = require("../db/models/user");
+const Stock = require("../db/models/stock");
 
 router.post("/signup",
     [
         // check ([field,message]) will validate to see if they match the logic and if not it will return the message. Returns validation chain.
         // https://express-validator.github.io/docs/validation-chain-api.html
-        check("username", "Please Enter a Valid Username")
-            .not()
-            .isEmpty(),
         check("email", "Please enter a valid email").isEmail(),
         check("password", "Please enter a valid password").isLength({
             min: 6
@@ -29,7 +27,6 @@ router.post("/signup",
             });
         }
         const {
-            username,
             email,
             password
         } = req.body;
@@ -46,7 +43,6 @@ router.post("/signup",
             }
             // otherwise it will create a new User
             user = new User({
-                username,
                 email,
                 password
             });
@@ -134,14 +130,60 @@ router.post("/login", [
 
 
 router.get("/me", auth, async (req, res) => {
+    console.log(req.decoded)
     try {
         // request.user is getting fetched from Middleware after token authentication
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.decoded.user.id);
         res.json(user);
     } catch (e) {
         res.send({ message: "Error in Fetching user" });
     }
 });
+
+router.get("/stock", auth, async (req, res) => {
+    try {
+        const userId = await User.findById(req.decoded.user.id1);
+        const stock = await Stock.find({ userId });
+        if (!stock) {
+            res.send("No stocks found.")
+        }
+        else {
+            res.send(stock)
+        }
+    }
+    catch (e) {
+        res.send({ message: "Error in Fetching user" })
+    }
+})
+
+router.post("/stock", auth, async (req, res) => {
+    res.send(req.body)
+    try {
+        const userId = await User.findById(req.decoded.user.id1);
+        const stock = await Stock.find({ userId });
+        console.log(stock)
+        if (!!stock) {
+            const newWatchlist = new Stock({
+                watchlistStocks: [],
+                userId: req.decoded.user.id
+            })
+            await newWatchlist.save()
+        }
+        else {
+            Stock.findOneAndUpdate({ userId }, { $push: { watchlistStocks: req.body.stockAdd } },
+                function (error) {
+                    if (error) {
+                        console.log("error");
+                    } else {
+                        console.log('sent');
+                    }
+                })
+        }
+    }
+    catch (e) {
+
+    }
+})
 
 module.exports = router;
 

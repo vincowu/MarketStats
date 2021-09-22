@@ -1,7 +1,21 @@
+@import "../../partials/main";
+
 .stock-chart{
     width: 100%;
     max-height: 300px;
+    @include tablet{
+        max-height: 500px;
+    }
+    @include desktop{
+        max-height: 500px;
+    }
     &__line{
         max-height: 200px;
+        @include tablet{
+            max-height: 500px;
+        }
+        @include desktop{
+            max-height: 500px;
+        }
     }
 }

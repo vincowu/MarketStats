@@ -2,10 +2,32 @@
 
 .watchlist-box{
     margin: 1rem 2rem;
-    .your-watchlist{
-        @include mobile-subheader;
+    @include tablet{
+        margin: 2rem 4rem;
     }
-
+    @include desktop{
+        
+    }
+    .watchlist-title{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        .your-watchlist{
+            @include mobile-subheader;
+            @include tablet{
+                @include desk-subheader;
+            }
+            @include desktop{
+                @include desk-subheader;
+            }
+        }
+        .edit-icon{
+            margin-right: 1rem;
+        }
+        .edit-icon:hover{
+            cursor: pointer;
+        }
+    }
     .container{
         overflow-x: scroll;
         .table{
@@ -14,6 +36,12 @@
                     &__cell{
                         @include body-large;
                         color: $black;
+                        @include tablet{
+                            @include desk-bodyXlarge;
+                        }
+                        @include desktop{
+                            @include desk-bodyXlarge;
+                        }
                     }
                 }
             }
@@ -22,6 +50,18 @@
                     &__cell{
                         @include body-medium;
                         color: $black;
+                        @include tablet{
+                            @include desk-bodylarge;
+                        }
+                        @include desktop{
+                            @include desk-bodylarge; 
+                        }
+                        .delete-icon{
+                            padding-top: 9px;
+                        }
+                        .delete-icon:hover{
+                            cursor: pointer;
+                        }
                         &--green{
                             color: $green;
                         }

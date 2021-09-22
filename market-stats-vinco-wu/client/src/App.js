@@ -16,7 +16,8 @@ class App extends React.Component {
   }
   clickLogin = () => {
     this.setState({
-      loginModal: true
+      loginModal: true,
+      signupModal: false
     })
   }
   clickSignup = () => {
@@ -32,7 +33,6 @@ class App extends React.Component {
     })
   }
   render() {
-    console.log(this.state)
     return (
       <BrowserRouter>
         <Navigation login={this.clickLogin} />
@@ -41,7 +41,7 @@ class App extends React.Component {
             <Home />
             {this.state.loginModal && (<LoginModal open={this.state.loginModal} closing={this.closeModals} signup={this.clickSignup} />)}
             {this.state.signupModal && (<SignUpModal open={this.state.signupModal}
-              closing={this.closeModals} />)}
+              closing={this.closeModals} redirect={this.clickLogin} />)}
           </Route>
           <Route path="/search/:stock" exact
             render={(routerParams) => {
